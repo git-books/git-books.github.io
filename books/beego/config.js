@@ -21,7 +21,7 @@ config.authorName = 'astaxie'
 
 config.theme = 'paper'
 config.codeTheme = 'github'
-config.catelogPage = '/examples/beego/catelog.md'
+config.catelogPage = '/books/beego/catelog.md'
 config.defaultPage = 'intro/Introduction.md'
 config.makeTOC = true
 config.emptyData = 'No content to display!'
