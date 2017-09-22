@@ -255,7 +255,12 @@ function showPageContent(pageUrl, title, refresh, callback) {
 
     // has image tag
     if (html.indexOf('<img src="') > 0) {
-      html = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, '<img class="img-responsive" src="' + config.dataUrl + '$1">')
+      html = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function(item, $1) {
+        // '<img class="img-responsive" src="' + config.dataUrl + '$1">'
+        // console.log( $1, $1.indexOf('../'), $1.replace('../', ''))
+        let newSrc = config.dataUrl + ($1.indexOf('../') === 0 ? $1.replace('../', '') : $1)
+        return '<img class="img-responsive" src="' + newSrc + '">'
+      })
     }
 
     content.attr('data-url', pageUrl).html(html)
