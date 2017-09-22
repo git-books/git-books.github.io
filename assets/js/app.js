@@ -257,7 +257,7 @@ function showPageContent(pageUrl, title, refresh, callback) {
     if (html.indexOf('<img src="') > 0) {
       html = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function(item, $1) {
         // console.log( $1, $1.indexOf('../'), $1.replace('../', ''))
-        let newSrc = config.dataUrl + ($1.indexOf('../') === 0 ? $1.replace('../', '') : $1)
+        let newSrc = config.dataUrl + ($1.indexOf('../') === 0 ? $1.replace(/..\//g, '') : $1)
         return '<img class="img-responsive" src="' + newSrc + '">'
       })
     }
@@ -297,7 +297,7 @@ function showPageContent(pageUrl, title, refresh, callback) {
         // inside link
       } else {
         if (href.indexOf('../') === 0) {
-          $(this).attr('href', href.replace('../', ''))
+          $(this).attr('href', href.replace(/..\//g, ''))
         }
         $(this).on('click', catelogLinksHandler)
       }
