@@ -220,7 +220,7 @@ function catelogLinksHandler(e) {
   window.history.pushState({name: title}, "", location.pathname + '?p=' + request.p)
   // 改变地址栏URL
   // window.history.replaceState({name: title}, "", config.basePath + '?p=' + href)
-  window.history.replaceState({name: title}, "", location.pathname + '?p=' + href)
+  // window.history.replaceState({name: title}, "", location.pathname + '?p=' + href)
 
   showPageContent(href, title)
 }
