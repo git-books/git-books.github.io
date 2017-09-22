@@ -216,9 +216,9 @@ function catelogLinksHandler(e) {
   sidebar.find('a').removeClass('active')
   $(this).addClass('active')
 
-  // 将地址栏URL加入历史
-  window.history.pushState({name: title}, "", location.pathname + '?p=' + request.p)
-  // 改变地址栏URL
+  // 将地址栏URL加入历史 并 改变地址栏URL
+  window.history.pushState({name: title}, "", location.pathname + '?p=' + href)
+  // 通过替换方式 改变地址栏URL
   // window.history.replaceState({name: title}, "", config.basePath + '?p=' + href)
   // window.history.replaceState({name: title}, "", location.pathname + '?p=' + href)
 
