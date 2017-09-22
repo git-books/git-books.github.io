@@ -297,6 +297,9 @@ function showPageContent(pageUrl, title, refresh, callback) {
 
         // inside link
       } else {
+        if (href.indexOf('../')) {
+          $(this).attr('href', href.replace('../', ''))
+        }
         $(this).on('click', catelogLinksHandler)
       }
     })
