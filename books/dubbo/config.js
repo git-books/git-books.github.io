@@ -7,14 +7,7 @@ config.logoUrl = '/books/dubbo/'
 config.assetBasePath = '/'
 
 config.docProject = 'dubbo/dubbo-user-book'
-config.dataUrl = 'https://raw.githubusercontent.com/dubbo/dubbo-user-book/master/'
-config.docUrl = 'https://github.com/dubbo/dubbo-user-book'
-config.editUrl = 'https://github.com/dubbo/dubbo-user-book/blob/master'
-config.docIssueUrl = 'https://github.com/dubbo/dubbo-user-book/issues'
-
 config.project = 'alibaba/dubbo'
-config.projectUrl = 'https://github.com/alibaba/dubbo'
-config.issueUrl = 'https://github.com/alibaba/dubbo/issues'
 
 config.authorPage = 'https://github.com/alibaba'
 config.authorName = 'alibaba'
