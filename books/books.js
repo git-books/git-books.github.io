@@ -1,4 +1,0 @@
-const books = [{
-  name: '',
-  description: ''
-}]

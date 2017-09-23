@@ -6,6 +6,12 @@
   <title>Some Books Examples</title>
   <link id="bts-style-link" rel="stylesheet" href="assets/lib/bootswatch/paper/bootstrap.min.css">
   <link id="code-style-link" rel="stylesheet" href="assets/lib/highlight/styles/github.css">
+  <style>
+    #book-list .book .thumbnail{
+      height: 220px;
+    }
+  </style>
+  <script src="/books.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -25,19 +31,25 @@
     </div>
   </nav>
   <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="list-group">
-          <a href="./books/go-web-programme/" class="list-group-item">Go Web 编程</a>
-          <a href="./books/beego/" class="list-group-item"> beego 开发文档</a>
-          <a href="./books/dubbo/" class="list-group-item"> Dubbo 用户文档</a>
-          <a href="./books/front-end-handbook-2017/" class="list-group-item"> Front-End Developer Handbook 2017</a>
-          <a href="./books/linux-insides-zh/" class="list-group-item"> Linux 内核揭密</a>
-          <a href="./books/mostly-adequate-guide-chinese/" class="list-group-item"> JS 函数式编程指南中文版</a>
-          <a href="#" class="list-group-item">more ...</a>
+
+      <div class="page-header">
+        <h1>Books<small>Subtext for header</small></h1>
+      </div>
+
+    <div id="book-list" class="row">
+
+      <div class="col-xs-6 col-sm-4 col-md-3 book">
+        <div class="thumbnail">
+          <div class="title"></div>
+          <div class="caption">
+            <h3>Thumbnail label</h3>
+            <p>...</p>
+            <p>
+              <a href="#" class="btn btn-primary"> Read  &rArr; </a>
+          </div>
         </div>
       </div>
-      <div class="col-md-6"></div>
+
     </div>
   </div>
 
@@ -58,5 +70,33 @@
     </div>
   </div>
   <!-- end.page-footer -->
+
+  <script src="/assets/lib/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      let booksHtml = ''
+
+      $.each(books, function (index, book) {
+        // console.log(index, book)
+        booksHtml += `
+        <div class="col-xs-6 col-sm-4 col-md-3 book">
+        <div class="thumbnail">
+          <div class="text-muted">${book.name}</div>
+          <div class="caption">
+            <strong style="font-size: 20px;">${book.name}</strong>
+            <p>${book.description} ...</p>
+            <p class="clearfix">
+              <a href="${book.url}" class="btn btn-primary pull-right"> Read  &rArr; </a>
+            </p>
+          </div>
+        </div>
+      </div>`
+      })
+
+      if (booksHtml) {
+        $('#book-list').html(booksHtml)
+      }
+    })
+  </script>
 </body>
 </html>
