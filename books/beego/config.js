@@ -7,15 +7,8 @@ config.logoUrl = '/examples/beego/'
 config.assetBasePath = '/'
 
 config.docProject = 'beego/beedoc'
-//   // e.g https://raw.githubusercontent.com/{astaxie/build-web-application-with-golang}/master/{beanfactory.md}
-config.dataUrl = 'https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/'
-config.docUrl = 'https://github.com/beego/beedoc'
-config.editUrl = 'https://github.com/beego/beedoc/blob/master/zh-CN'
 
 config.project = 'astaxie/beego'
-config.projectUrl = 'https://github.com/astaxie/beego'
-config.issueUrl = 'https://github.com/astaxie/beego/issues'
-
 config.authorPage = 'https://github.com/astaxie'
 config.authorName = 'astaxie'
 

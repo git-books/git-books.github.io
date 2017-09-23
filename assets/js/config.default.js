@@ -7,7 +7,7 @@ const config = {
   // page title = baseTile + content title
   baseTitle: 'beego-doc',
   assetBasePath: '',
-  logoUrl: '/',
+  logoUrl: location.pathname,
 
   lang: '', // zh-CN
   langs: [], // ["en", "zh-CN"],
@@ -40,8 +40,9 @@ const config = {
   /* £ $ & β ξ ψ ℘ § */
   anchorIcon: '℘',
   tableClass: 'table table-bordered table-striped',
-
   topLinks: ['<a href="/"><i class="fa fa-undo" aria-hidden="true"></i> back books list</a>'],
+  // topLinks: null,
+  bottomLinks: null,
 
   // some events
   onCatelogWrited: null,

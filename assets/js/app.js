@@ -37,6 +37,10 @@ const storage = {
   }
 }
 
+function isRemoteUrl(url) {
+  return url.search(/^http[s]?/) > -1
+}
+
 function getUrlRequest(){
   let url = location.search //获取url中"?"符后的字串
   let theRequest = new Object()
@@ -104,15 +108,18 @@ const request = getUrlRequest()
 const titleEl = $('head>title')
 const sidebar = $('#sidebar')
 const md = window.markdownit({
-    highlight: function (str, lang) {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(lang, str).value;
-        } catch (__) {}
-      }
-
-      return ''; // use external default escaping
+  html: true,
+  breaks: true,
+  linkify: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
     }
+
+    return ''; // use external default escaping
+  }
 })
 
 const MSR = {
@@ -122,35 +129,35 @@ const MSR = {
     this.prepareConfig()
     this.prepareInit()
 
-    this.start()
-  },
-  start() {
     const that = this
 
     // begin logic
-    $(function () { // init logic
-      that.settingBookInfo()
-      that.bindEvents()
-
-      // load catelog
-      showDocCatelog()
-
-      // load fist page
-      let page = request.p ? request.p : config.defaultPage
-      loadPageContent(page, null, false, function () {
-        theBook.fadeIn()
-        loading.hide()
-        highlightCatelogLink(sidebar.find('a[data-id=' + genLinkId(page) + ']'))
-
-        let hash = window.location.hash.substr(1)
-        if (hash) {
-          document.getElementById(hash).scrollIntoView()
-        }
-      })
-
-      //
-      that.doSomething()
+    $(function () {
+      that.start()
     })
+  },
+  start() {
+    this.settingBookInfo()
+    this.bindEvents()
+
+    // load catelog
+    showDocCatelog()
+
+    // load fist page
+    let page = request.p ? request.p : config.defaultPage
+    loadPageContent(page, null, false, function () {
+      theBook.fadeIn()
+      loading.hide()
+      highlightCatelogLink(sidebar.find('a[data-id=' + genLinkId(page) + ']'))
+
+      let hash = window.location.hash.substr(1)
+      if (hTag = document.getElementById(hash)) {
+        hTag.scrollIntoView()
+      }
+    })
+
+    //
+    this.doSomething()
   }
 }
 
@@ -287,8 +294,8 @@ MSR.bindEvents = function () {
       storage.set(CACHE_KEY_LANG, newLang)
       window.location.reload()
     })
-  } else {
-    $('#lang-list').hide()
+  // } else {
+  //   $('#lang-list').hide()
   }
 
   // catelog refresh
@@ -322,12 +329,16 @@ MSR.bindEvents = function () {
   })
 
   $('#content-toc-ctrl').on('click', function() {
-    $('#content-toc').toggle()
+    $('#content-toc').slideToggle('slow')
   })
 
-  // back-to-top
-  $('#back-to-top ').on('click', function() {
-    $('#content-box').scrollTop(0)
+  // goto-top
+  $('#goto-btns .goto-top ').on('click', function() {
+    $('#content-box').animate({scrollTop:0}, 'slow')
+  })
+  // goto-bottom
+  $('#goto-btns .goto-bottom ').on('click', function() {
+    $('#content-box').animate({scrollTop: $('#content').height() }, 'slow')
   })
 }
 
@@ -350,7 +361,7 @@ function showDocCatelog(refresh) {
   if (refresh || !res) {
     let url = config.dataUrl + config.catelogPage
 
-    if (config.catelogPage[0] === '/' || config.catelogPage.search(/^http[s]/) > -1) {
+    if (config.catelogPage[0] === '/' || isRemoteUrl(config.catelogPage)) {
       url = config.catelogPage
     }
 
@@ -461,6 +472,10 @@ function renderPageContent(res, pageUrl, title, cacheKey, onRendered) {
   if (html.indexOf('<img src="') > 0) {
     // html = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, '<img class="img-responsive" src="' + config.dataUrl + '$1">')
     html = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function(item, $1) {
+      if (isRemoteUrl($1)) {
+        return '<img class="img-responsive" src="' + $1 + '">'
+      }
+
       // console.log( $1, $1.indexOf('../'))
       let newSrc = config.dataUrl + ($1.indexOf('../') === 0 ? $1.replace(/\.\.\//g, '') : $1)
       return '<img class="img-responsive" src="' + newSrc + '">'
@@ -497,7 +512,7 @@ function renderPageContent(res, pageUrl, title, cacheKey, onRendered) {
     }
 
     // outside link
-    if (href.search(/^http[s]/) > -1) {
+    if (isRemoteUrl(href)) {
       $(this).attr('target', '_blank')
 
       // inside link

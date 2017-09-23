@@ -3,7 +3,6 @@ config.baseTitle = 'alibaba java dubbo'
 config.siteName = 'alibaba java dubbo'
 config.siteDes = '详细讲解了dubbo的使用，基本涵盖dubbo的所有功能特性'
 config.siteKey = 'alibaba-java-dubbo'
-config.logoUrl = '/books/dubbo/'
 config.assetBasePath = '/'
 
 config.docProject = 'dubbo/dubbo-user-book'
