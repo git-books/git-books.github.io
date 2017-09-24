@@ -26,7 +26,7 @@
               <a href="/manage/?act=createBook"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Create Book</a>
             </li>
             <li>
-              <a href="/manage/?act=checkRepo"><i class="glyphicon glyphicon-download" aria-hidden="true"></i> Update Repo</a>
+              <a href="/manage/?act=checkRepo"><i class="glyphicon glyphicon-download" aria-hidden="true"></i> Check Repo</a>
             </li>
           </ul>
 

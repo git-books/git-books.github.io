@@ -114,7 +114,7 @@ function index()
 {
     $data = [
         'title' => 'create book',
-        'active' => App::$own->action,
+        'action' => App::$own->action,
         'error' => '',
     ];
 
@@ -126,15 +126,21 @@ function create_book()
     $isPost = false;
     $data = [
         'title' => 'create book',
-        'active' => App::$own->action,
+        'action' => App::$own->action,
         'error' => '',
     ];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isPost = true;
-        $booksConfig = file_get_contents(App::$own->getBasePath() . '/books.js');
         $data['folder'] = trim(get_post('folder'));
-        $data['config'] = get_post('config');
+        $data['config'] = trim(get_post('config'));
+
+        if (!$data['folder'] || !$data['config']) {
+            $data['error'] = 'the book folder name and config cannot be empty!';
+        } else {
+            $booksConfig = file_get_contents(App::$own->getBasePath() . '/books.js');
+        }
+
     } else {
         $data['folder'] = '';
         $data['config'] = file_get_contents(__DIR__ . '/config.exam.js');
@@ -148,24 +154,25 @@ function create_book()
 function check_repo()
 {
     $data = [
-        'title' => 'create book',
-        'active' => App::$own->action,
+        'title' => 'check repo',
+        'action' => App::$own->action,
         'error' => '',
+        'commands' => ['log', 'status', 'pull'],
     ];
     $root = App::$own->getBasePath();
     $cmd = $data['cmd'] = get_query('cmd', 'status');
 
     switch ($cmd) {
         case 'log':
-            $ouput = shell_exec("cd $root && git log -3");
+            $output = shell_exec("cd $root && git log -3");
             break;
 
         case 'status':
-            $ouput = shell_exec("cd $root && git checkout . && git pull");
+            $output = shell_exec("cd $root && git status");
             break;
 
         case 'pull':
-            $ouput = shell_exec("cd $root && git checkout . && git pull");
+            $output = shell_exec("cd $root && git checkout . && git pull");
             break;
 
         default:

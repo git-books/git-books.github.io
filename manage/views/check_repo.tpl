@@ -8,23 +8,23 @@
       <h3 class="panel-title">Repo info</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline" method="get">
+      <form class="form-inline" method="get" action="/manage/">
+        <input type="hidden" name="act" value="checkRepo">
         <div class="form-group">
-          <label for="folder">Command</label>
-          <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
-          </label>
+          <label>Command</label>
+          <?php foreach ($commands as $name): ?>
+            <label class="radio-inline">
+              <input type="radio" name="cmd" id="<?=$name ?>" value="<?=$name ?>" <?php if ($cmd === $name): ?>checked<?php endif ?>>
+              <?=$name ?>
+            </label>
+          <?php endforeach ?>
         </div>
-
         <button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send" aria-hidden="true"></i> Submit</button>
-
       </form>
+
+      <div class="well well-sm">
+        <pre><?= $output; ?></pre>
+      </div>
     </div>
   </div>
 </div>
