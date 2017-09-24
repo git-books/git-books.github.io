@@ -6,7 +6,7 @@
 $users = [
     'inhere' => 'managebooks',
 ];
-$actions = [
+$handlers = [
     'updateRepo' => 'update_repo',
     'createBook' => 'create_book',
 ];
@@ -17,12 +17,24 @@ if ($action === 'logout') {
     logout();
 }
 
-user_auth();
+if (!$cb = $handlers[$act] ?? null) {
+    $cb = $handlers['createBook'];
+}
 
-// If arrives here, is a valid user.
-echo "<p>Welcome $user.</p>";
-echo "<p>Congratulation, you are into the system.</p>";
-echo 'hello';
+user_auth();
+$cb();
+
+function create_book()
+{
+   echo 'hello, create_book';
+}
+
+function update_repo()
+{
+    $root = dirname(__DIR__);
+    $ouput = shell_exec("cd $root && git checkout . && git pull");
+    echo "Update Repo:<br><pre>$ouput</pre>";
+}
 
 function user_auth()
 {
