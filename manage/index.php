@@ -3,30 +3,117 @@
  * simple entry
  */
 
-$users = [
-    'inhere' => 'managebooks',
-];
-$handlers = [
-    'updateRepo' => 'update_repo',
-    'createBook' => 'create_book',
-];
+class App
+{
+    public static $own;
 
-$action = get_query('act', 'createBook');
+    public $handlers = [
+        'index' => 'index',
+        'updateRepo' => 'update_repo',
+        'createBook' => 'create_book',
+    ];
 
-if ($action === 'logout') {
-    logout();
+    private $basePath;
+
+    public $config = [
+        'users' => null,
+    ];
+
+    public $action;
+
+    public $user;
+
+    public function __construct()
+    {
+        self::$own = $this;
+    }
+
+    public function loadConfig()
+    {
+        $this->basePath = dirname(__DIR__);
+        $file = $this->basePath . '/.local';
+
+        if (!is_file($file)) {
+            self::stop('No auth data source config.');
+        }
+
+        $this->config = parse_ini_file($file, true);
+
+        if (empty($this->config['users'])) {
+            self::stop('No auth data source.');
+        }
+    }
+
+    public function run()
+    {
+        $this->loadConfig();
+
+        $this->action = $act = get_query('act', 'createBook');
+
+        if ($this->action === 'logout') {
+            logout();
+        }
+
+        if (!$cb = $this->handlers[$act] ?? null) {
+            $cb = $this->handlers['index'];
+        }
+
+        $this->user = $this->userAuth();
+        $cb();
+        self::stop();
+    }
+
+    public static function stop($msg=0)
+    {
+        exit($msg);
+    }
+
+    public function userAuth()
+    {
+        $users = $this->config['users'];
+        $user = $_SERVER['PHP_AUTH_USER'] ?? null;
+        $pass = $_SERVER['PHP_AUTH_PW'] ?? null;
+
+        $validated = $user && $pass && isset($users[$user]) && $users[$user] === $pass;
+
+        if (!$validated) {
+          header('WWW-Authenticate: Basic realm="My Realm"');
+          header('HTTP/1.0 401 Unauthorized');
+          self::stop("Not authorized");
+        }
+
+        return [
+            'user' => $user,
+            'pass' => $pass,
+        ];
+    }
+
+    public function logout()
+    {
+        $_SERVER['PHP_AUTH_USER'] = $_SERVER['PHP_AUTH_PW'] = null;
+        header('Location: /');
+        self::stop();
+    }
 }
 
-if (!$cb = $handlers[$act] ?? null) {
-    $cb = $handlers['createBook'];
-}
+(new App)->run();
 
-user_auth();
-$cb();
+function index()
+{
+    render_tpl('index', [
+        'title' => 'Index',
+        'active' => App::$own->action,
+        'links' => array_keys(App::$own->handlers),
+    ]);
+}
 
 function create_book()
 {
-   echo 'hello, create_book';
+    render_tpl('create_book', [
+        'title' => 'create book',
+        'active' => App::$own->action,
+        'links' => array_keys(App::$own->handlers),
+    ]);
 }
 
 function update_repo()
@@ -34,27 +121,33 @@ function update_repo()
     $root = dirname(__DIR__);
     $ouput = shell_exec("cd $root && git checkout . && git pull");
     echo "Update Repo:<br><pre>$ouput</pre>";
+
+    render_tpl('update_repo', [
+        'title' => 'update repo',
+        'active' => App::$own->action,
+        'links' => array_keys(App::$own->handlers),
+    ]);
 }
 
-function user_auth()
+/**********************************
+ * helper func
+ **********************************/
+
+
+function render_tpl($view, array $data = [])
 {
-    $user = $_SERVER['PHP_AUTH_USER'] ?? null;
-    $pass = $_SERVER['PHP_AUTH_PW'] ?? null;
+    header('Content-Type: text/html; charset=UTF-8');
+    extract($data, EXTR_OVERWRITE);
 
-    $validated = $user && $pass && isset($users[$user]) && $users[$user] === $pass;
+    ob_start();
+    include __DIR__ . '/views/_layout.tpl';
+    $res = ob_get_clean();
 
-    if (!$validated) {
-      header('WWW-Authenticate: Basic realm="My Realm"');
-      header('HTTP/1.0 401 Unauthorized');
-      exit("Not authorized");
-    }
-}
+    ob_start();
+    include __DIR__ . '/views/' . $view . '.tpl';
+    $content = ob_get_clean();
 
-function logout()
-{
-    $_SERVER['PHP_AUTH_USER'] = $_SERVER['PHP_AUTH_PW'] = null;
-    header('Location: /');
-    exit;
+    echo str_replace('{_CONTENT_}', $content, $res);
 }
 
 function get_query($name, $default = null)
