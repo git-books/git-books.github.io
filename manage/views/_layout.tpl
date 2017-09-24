@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?> - Manage</title>
-    <link rel="stylesheet" href="assets/lib/bootswatch/paper/bootstrap.min.css">
+    <title><?= isset($title) ? $title : 'OO ...' ?> - Manage</title>
+    <link rel="stylesheet" href="/assets/lib/bootswatch/paper/bootstrap.min.css">
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -20,17 +20,20 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-4">
           <ul class="nav navbar-nav">
             <li>
-              <a href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i> Home</a>
+              <a href="/manage/"><i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i> Dashboard</a>
             </li>
             <li>
-              <a href="/manage/?act=create_book"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Create Book</a>
+              <a href="/manage/?act=createBook"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Create Book</a>
             </li>
             <li>
-              <a href="/manage/?act=update_repo"><i class="glyphicon glyphicon-download" aria-hidden="true"></i> Update Repo</a>
+              <a href="/manage/?act=checkRepo"><i class="glyphicon glyphicon-download" aria-hidden="true"></i> Update Repo</a>
             </li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i> Home</a>
+            </li>
             <li>
               <a href="/manage/?act=logout"><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i> Logout</a>
             </li>
@@ -40,7 +43,16 @@
     </nav>
 
     <div class="container">
-        <div class="row">{_CONTENT_}</div>
+        <div class="row">
+          <?php if ($error): ?>
+            <div class="col-xs-12">
+                <div class="alert alert-danger" role="alert">
+                  <strong>Danger!</strong> <?= $error ?>
+                </div>
+            </div>
+          <?php endif; ?>
+          {_CONTENT_}
+        </div>
     </div>
 </body>
 </html>

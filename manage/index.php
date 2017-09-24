@@ -9,7 +9,7 @@ class App
 
     public $handlers = [
         'index' => 'index',
-        'updateRepo' => 'update_repo',
+        'checkRepo' => 'check_repo',
         'createBook' => 'create_book',
     ];
 
@@ -48,18 +48,25 @@ class App
     {
         $this->loadConfig();
 
-        $this->action = $act = get_query('act', 'createBook');
+        $this->action = $act = get_query('act', 'index');
 
         if ($this->action === 'logout') {
-            logout();
+            $this->logout();
         }
 
         if (!$cb = $this->handlers[$act] ?? null) {
             $cb = $this->handlers['index'];
         }
 
-        $this->user = $this->userAuth();
-        $cb();
+        $msg = 0;
+
+        try {
+            $this->user = $this->userAuth();
+            $cb();
+        } catch (\Throwable $e) {
+            $msg = $e->getMessage();
+        }
+
         self::stop();
     }
 
@@ -94,39 +101,81 @@ class App
         header('Location: /');
         self::stop();
     }
+
+    public function getBasePath()
+    {
+        return $this->basePath;
+    }
 }
 
 (new App)->run();
 
 function index()
 {
-    render_tpl('index', [
-        'title' => 'Index',
+    $data = [
+        'title' => 'create book',
         'active' => App::$own->action,
-        'links' => array_keys(App::$own->handlers),
-    ]);
+        'error' => '',
+    ];
+
+    render_tpl('index', $data);
 }
 
 function create_book()
 {
-    render_tpl('create_book', [
+    $isPost = false;
+    $data = [
         'title' => 'create book',
         'active' => App::$own->action,
-        'links' => array_keys(App::$own->handlers),
-    ]);
+        'error' => '',
+    ];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $isPost = true;
+        $booksConfig = file_get_contents(App::$own->getBasePath() . '/books.js');
+        $data['folder'] = trim(get_post('folder'));
+        $data['config'] = get_post('config');
+    } else {
+        $data['folder'] = '';
+        $data['config'] = file_get_contents(__DIR__ . '/config.exam.js');
+    }
+
+    $data['isPost'] = $isPost;
+
+    render_tpl('create_book', $data);
 }
 
-function update_repo()
+function check_repo()
 {
-    $root = dirname(__DIR__);
-    $ouput = shell_exec("cd $root && git checkout . && git pull");
-    echo "Update Repo:<br><pre>$ouput</pre>";
-
-    render_tpl('update_repo', [
-        'title' => 'update repo',
+    $data = [
+        'title' => 'create book',
         'active' => App::$own->action,
-        'links' => array_keys(App::$own->handlers),
-    ]);
+        'error' => '',
+    ];
+    $root = App::$own->getBasePath();
+    $cmd = $data['cmd'] = get_query('cmd', 'status');
+
+    switch ($cmd) {
+        case 'log':
+            $ouput = shell_exec("cd $root && git log -3");
+            break;
+
+        case 'status':
+            $ouput = shell_exec("cd $root && git checkout . && git pull");
+            break;
+
+        case 'pull':
+            $ouput = shell_exec("cd $root && git checkout . && git pull");
+            break;
+
+        default:
+            $output = 'Invalid command ' . $cmd;
+            break;
+    }
+
+    $data['output'] = $output;
+
+    render_tpl('check_repo', $data);
 }
 
 /**********************************
@@ -136,6 +185,12 @@ function update_repo()
 
 function render_tpl($view, array $data = [])
 {
+    $viewFile = __DIR__ . '/views/' . $view . '.tpl';
+
+    if (!is_file($viewFile)) {
+        throw new \InvalidArgumentException("The view [$view] file is not eixsts");
+    }
+
     header('Content-Type: text/html; charset=UTF-8');
     extract($data, EXTR_OVERWRITE);
 
