@@ -22,4 +22,8 @@ const books = [{
   url: '/books/mostly-adequate-guide-chinese/',
   name: 'JS 函数式编程指南中文版',
   description: 'JS 函数式编程指南中文版'
+}, {
+  url: '/books/php-co-koa/',
+  name: 'PHP异步编程: 手把手教你实现co与Koa',
+  description: 'PHP异步编程: 手把手教你实现co与Koa'
 }]
