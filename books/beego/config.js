@@ -6,6 +6,9 @@ config.siteKey = 'beego-doc'
 config.logoUrl = '/examples/beego/'
 config.assetBasePath = '/'
 
+config.lang = 'zh-CN'
+config.langs = ["en-US", "zh-CN"]
+
 config.docProject = 'beego/beedoc'
 
 config.project = 'astaxie/beego'
