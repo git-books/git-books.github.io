@@ -177,6 +177,10 @@ body {
   margin: 10px 0;
   font-size: 18px;
 }
+#sidebar h3,#sidebar h4 {
+  margin: 8px 0;
+  font-size: 16px;
+}
 #sidebar p {
   margin: 0;
 }
