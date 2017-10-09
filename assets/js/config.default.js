@@ -42,8 +42,8 @@ const config = {
   /* £ $ & β ξ ψ ℘ § */
   anchorIcon: '℘',
   tableClass: 'table table-bordered table-striped',
-  // topLinks: ['<a href="/"><i class="fa fa-undo" aria-hidden="true"></i> back books list</a>'],
-  topLinks: null,
+  topLinks: ['<a href="/"><i class="fa fa-undo" aria-hidden="true"></i> back books list</a>'],
+  // topLinks: null,
   bottomLinks: null,
 
   // some events
