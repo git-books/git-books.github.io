@@ -392,16 +392,28 @@ function renderDocCatelog(res) {
 
   // sidebar.find('div.catelog').html(html).find('a').append(icon).on('click', catelogLinksHandler)
   sidebar.find('div.catelog').html(html).find('a').each(function () {
-    let id = genLinkId($(this).attr('href'))
-    $(this).attr({'data-id': id, title: $(this).text()}).append(icon).on('click', catelogLinksHandler)
+    let href = decodeURIComponent($(this).attr('href'))
+    let id = genLinkId(href)
+
+    $(this).attr({
+      'data-id': id,
+      href: href,
+      title: $(this).text()
+    }).append(icon).on('click', catelogLinksHandler)
   })
 }
 
 function catelogLinksHandler(e) {
-  e.preventDefault() // 默认事件
-  e.stopPropagation() // 事件冒泡
   let href = $(this).attr('href')
   let title = $(this).text()
+
+  if (isRemoteUrl(href)) {
+    $(this).attr('target', '_blank')
+    return;
+  }
+
+  e.preventDefault() // 默认事件
+  e.stopPropagation() // 事件冒泡
 
   highlightCatelogLink($(this))
 
@@ -471,7 +483,7 @@ function renderPageContent(res, pageUrl, title, cacheKey, onRendered) {
     storage.set(cacheKey, res)
     html = md.render(res)
   } else {
-    html = '<h2 class="text-muted">' + config.emptyData + '</h2>'
+    html = '<h1 class="text-muted">' + config.emptyData + '</h1>'
   }
 
   // has image tag
@@ -622,7 +634,7 @@ function createContentTOC(contentBox) {
   hList.each(function(i,item){
     let hTag = $(item), title = hTag.text()
     let tag = hTag.get(0).localName
-    let id = 'md-title-item' + i
+    let id = hTag.text().toLowerCase()
     let mgLeft = (tag[1] - 2) * 15
     /* £ $ & β ξ ψ ℘ § */
     let ha = $('<a class="anchor-link" data-anchor-icon="' + config.anchorIcon + '"></a>')

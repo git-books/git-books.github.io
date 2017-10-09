@@ -39,4 +39,8 @@ const books = [{
   url: '/books/php-co-koa/',
   name: 'PHP异步编程: 手把手教你实现co与Koa',
   description: 'PHP异步编程: 手把手教你实现co与Koa'
+}, {
+  url: '/books/tido-docs-cn/',
+  name: 'TiDB 中文技术文档',
+  description: 'TiDB 中文技术文档'
 }]
