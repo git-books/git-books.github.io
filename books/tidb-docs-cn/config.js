@@ -2,7 +2,7 @@
 config.baseTitle = 'TiDB 中文技术文档'
 config.siteName = 'TiDB 中文技术文档'
 config.siteDes = 'TiDB 中文技术文档'
-config.siteKey = 'tido-docs-cn'
+config.siteKey = 'tidb-docs-cn'
 config.assetBasePath = '/'
 
 config.docProject = 'pingcap/docs-cn'
@@ -14,7 +14,7 @@ config.authorName = 'pingcap'
 config.theme = 'paper'
 config.codeTheme = 'github'
 // config.catelogPage = 'SUMMARY.md'
-config.catelogPage = '/books/tido-docs-cn/catelog.md'
+config.catelogPage = '/books/tidb-docs-cn/catelog.md'
 config.defaultPage = 'README.md'
 config.makeTOC = true
 config.emptyData = 'No content to display!'

@@ -37,6 +37,10 @@ const storage = {
   }
 }
 
+function in_array (arr, item) {
+  return arr.indexOf(item) > -1
+}
+
 function isRemoteUrl(url) {
   return url.search(/^http[s]?/) > -1
 }
@@ -101,6 +105,9 @@ function replaceState (url, statObj) {
 const CACHE_KEY_LANG = config.siteKey + '_lang'
 const CACHE_KEY_THEME = config.siteKey + '_theme'
 const CACHE_KEY_WITH_SIDEBAR = config.siteKey + '_with_sidebar'
+
+const TYPE_MD = ['md', 'markdown']
+const TYPE_RST = ['rst', 'reStructuredText']
 
 const theBook = $('div.book')
 const loading = $('#loading-layer')
@@ -360,6 +367,21 @@ MSR.doSomething = function () {
   }
 }
 
+function parseFetchedText(text, url) {
+  if (!text) {
+    return text
+  }
+
+  let ext = url.split('.').pop()
+
+  // is reStructuredText doc
+  if (in_array(TYPE_RST, ext)) {
+    text = rst2mdown(text)
+  }
+
+  return md.render(text)
+}
+
 function showDocCatelog(refresh) {
   let res = storage.get(MSR.cacheKeyCatelog)
   refresh = refresh === undefined ? false : refresh
@@ -386,8 +408,8 @@ function renderDocCatelog(res) {
 
   storage.set(MSR.cacheKeyCatelog, res)
 
-  // let sidebar = $('#sidebar')
-  let html = md.render(res)
+  // let html = md.render(res)
+  let html = parseFetchedText(res, config.catelogPage)
   let icon = ' <i class="fa fa-check search-matched hide"></i>'
 
   // sidebar.find('div.catelog').html(html).find('a').append(icon).on('click', catelogLinksHandler)
@@ -481,7 +503,8 @@ function renderPageContent(res, pageUrl, title, cacheKey, onRendered) {
   if (res) {
     // add cache
     storage.set(cacheKey, res)
-    html = md.render(res)
+    // html = md.render(res)
+    html = parseFetchedText(res, pageUrl)
   } else {
     html = '<h1 class="text-muted">' + config.emptyData + '</h1>'
   }

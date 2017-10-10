@@ -38,9 +38,19 @@ const books = [{
 }, {
   url: '/books/php-co-koa/',
   name: 'PHP异步编程: 手把手教你实现co与Koa',
-  description: 'PHP异步编程: 手把手教你实现co与Koa'
+  description: 'PHP异步编程: 手把手教你实现co与Koa',
+  category: 'php',
+  tags: ['async', 'framework']
 }, {
-  url: '/books/tido-docs-cn/',
+  url: '/books/zanphp-doc/',
+  name: 'ZanPHP 中文文档',
+  description: 'ZanPHP是基于PHP协程的网络服务框架，提供最简单的方式开发面向C10K+的高并发SOA服务和RPC服务',
+  category: 'php',
+  tags: ['async', 'rpc', 'framework']
+}, {
+  url: '/books/tidb-docs-cn/',
   name: 'TiDB 中文技术文档',
-  description: 'TiDB 中文技术文档'
+  description: 'TiDB 中文技术文档',
+  category: 'database',
+  tags: ['newSql', 'database']
 }]

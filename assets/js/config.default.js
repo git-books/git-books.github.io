@@ -9,11 +9,10 @@ const config = {
   assetBasePath: '',
   logoUrl: location.pathname,
 
-  docType: 'md', // 'rst'
-
   lang: '', // zh-CN
   langs: [], // ["en", "zh-CN"],
 
+  docType: 'md', // 'rst'
   docProject: 'beego/beedoc',
   docUrl: 'https://github.com/{docProject}',
   // e.g https://raw.githubusercontent.com/{beego/beedoc}/master/{zh-CN}/{intro/README.md}

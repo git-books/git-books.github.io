@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+echo "start simple server on 127.0.0.1:4455"
+
+php -S 127.0.0.1:4455
