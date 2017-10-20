@@ -491,9 +491,21 @@ function rst2mdown (text) {
           rst = rst.substring(m[0].length);
 
           space = m[0].match(/^ */)[0].length;
-
+          // 类似于 收集图片的属性： 宽高等(若存在的话)
           text = m[0].replace(new RegExp('^ {' + space + '}', 'gm'), '');
 
+          if (directive in options.directiveLexers) {
+            text = options.directiveLexers[directive](text, tokens, top, args);
+          }
+
+          if (text && typeof text === 'string') {
+            tokens.push({
+              type: 'directiveBlock',
+              text: text
+            });
+          }
+          // add at 17.10.20 只有图片链接，没有属性
+        } else {
           if (directive in options.directiveLexers) {
             text = options.directiveLexers[directive](text, tokens, top, args);
           }

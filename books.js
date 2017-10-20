@@ -1,4 +1,10 @@
 const books = [{
+  name: '图说设计模式',
+  url: '/books/design-patterns-zh/',
+  description: '使用图形和代码结合的方式来解析设计模式',
+  category: 'design-patterns',
+  tags: ['design-patterns', 'php']
+}, {
   name: 'Go Web 编程',
   url: '/books/go-web-programme/',
   description: 'Go Web 编程的描述信息'
