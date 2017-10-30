@@ -89,6 +89,10 @@ body {
   border-bottom: 1px solid #bcbcbc;
 }
 
+.theme-flatly #search-box {
+  padding-top: 5px;
+}
+
 #search-box .form-group{
   margin-bottom: 0;
 }

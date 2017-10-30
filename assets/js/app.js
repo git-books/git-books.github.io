@@ -121,11 +121,13 @@ const md = window.markdownit({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(lang, str).value;
+        return '<pre class="hljs"><code class="language-' + lang + '">' +
+               hljs.highlight(lang, str, true).value +
+               '</code></pre>'
       } catch (__) {}
     }
 
-    return ''; // use external default escaping
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
   }
 })
 
@@ -241,6 +243,7 @@ MSR.prepareInit = function () {
 
 MSR.settingBookInfo = function () {
   // prepare some info to page
+  $('body').addClass('theme-' + config.theme)
   $('#sidebar-box').css({'top': config.navHeight + 'px'})
   $('#content-box').css({'top': config.navHeight + 'px'})
   $('#top-logo').attr('href', config.logoUrl).html(config.siteName)
