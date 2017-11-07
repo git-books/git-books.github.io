@@ -22,6 +22,10 @@ const books = [{
   name: 'google gRpc 开发文档',
   description: 'google gRpc developer documentation'
 }, {
+  url: '/books/web-dev-golang-anti-textbook/',
+  name: 'web dev golang anti textbook',
+  description: 'Learn how to write webapps without a framework in Go'
+}, {
   url: '/books/beego/',
   name: 'beego 开发文档',
   description: 'beego 开发文档'
