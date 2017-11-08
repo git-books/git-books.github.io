@@ -12,6 +12,10 @@ const config = {
   lang: '', // zh-CN
   langs: [], // ["en", "zh-CN"],
 
+  branch: 'master',
+  version: 'master',
+  versions: ['master'],
+
   docType: 'md', // 'rst'
   docProject: 'beego/beedoc',
   docUrl: 'https://github.com/{docProject}',

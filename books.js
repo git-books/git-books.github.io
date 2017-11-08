@@ -56,6 +56,12 @@ const books = [{
   category: 'php',
   tags: ['async', 'framework']
 }, {
+  url: '/books/php-phalcon/',
+  name: 'php phalcon docs',
+  description: 'Phalcon is an open source full stack framework for PHP, written as a C-extension',
+  category: 'php',
+  tags: ['c-extension', 'framework']
+}, {
   url: '/books/zanphp-doc/',
   name: 'ZanPHP 中文文档',
   description: 'ZanPHP是基于PHP协程的网络服务框架，提供最简单的方式开发面向C10K+的高并发SOA服务和RPC服务',
