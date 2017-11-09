@@ -32,7 +32,15 @@ const books = [{
 }, {
   url: '/books/beego/',
   name: 'beego 开发文档',
-  description: 'beego 开发文档'
+  description: 'beego 开发文档',
+  category: 'golang',
+  tags: ['golang', 'framework']
+}, {
+  url: '/books/faygo/',
+  name: 'faygo 开发文档',
+  description: 'Faygo 是一款快速、简洁的Go Web框架，可用极少的代码开发出高性能的Web应用程序（尤其是API接口）',
+  category: 'golang',
+  tags: ['golang', 'framework', 'api']
 }, {
   url: '/books/dubbo/',
   name: 'Dubbo 用户文档',

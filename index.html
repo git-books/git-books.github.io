@@ -7,12 +7,21 @@
   <link id="bts-style-link" rel="stylesheet" href="assets/lib/bootswatch/paper/bootstrap.min.css">
   <link id="code-style-link" rel="stylesheet" href="assets/lib/highlight/styles/github.css">
   <style>
-    #book-list .book .thumbnail{
-      height: 220px;
+    #book-list .book:hover {
+      box-shadow: 0 0 10px #999;
     }
-    #book-list .media {
-      border: 1px solid #eee;
-      padding: 10px 5px;
+    #book-list .book-title {
+      font-size: 18px;
+      overflow: hidden;
+      white-space: nowrap;
+      -o-text-overflow: ellipsis;
+      text-overflow:  ellipsis;
+    }
+    #book-list p.book-description {
+      height: 6rem;
+      line-height: 2em;
+      overflow: hidden;
+      /*white-space: nowrap; -o-text-overflow: ellipsis; text-overflow:  ellipsis;*/
     }
   </style>
   <script src="/books.js"></script>
@@ -35,13 +44,16 @@
     </div>
   </nav>
   <div class="container">
+    <div class="jumbotron">
+      <h1>Hello, Books!</h1>
+      <p>free programming books ...</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
     <div class="page-header">
       <h1>Books<small>free programming books</small></h1>
     </div>
 
-    <div class="row">
-      <div id="book-list" class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-      </div>
+    <div id="book-list" class="row">
     </div>
   </div>
 
@@ -62,7 +74,11 @@
     </div>
   </div>
   <!-- end.page-footer -->
-
+<div class="panel panel-default">
+  <div class="panel-body">
+    Basic panel example
+  </div>
+</div>
   <script src="/assets/lib/jquery-2.2.4.min.js"></script>
   <script type="text/javascript">
     $(function () {
@@ -71,13 +87,16 @@
       $.each(books, function (index, book) {
         // console.log(index, book)
         booksHtml += `
-        <div class="media">
-          <div class="media-left"><a href="#"></a></div>
-          <div class="media-body">
-            <h4 class="media-heading"><i class="glyphicon glyphicon-book" aria-hidden="true"></i> ${book.name}</h4>
-            <p>${book.description} ...</p>
+        <div class="book panel panel-default col-xs-6 col-sm-4 col-md-3">
+          <div class="panel-body">
+            <h4 class="book-title">
+              <a href="${book.url}" title="${book.name}">${book.name}</a>
+            </h4>
+            <p class="book-description">${book.description} ...</p>
             <div class="clearfix">
-              <a href="${book.url}" class="btn btn-primary pull-right"> Read <i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i></a>
+              <a href="${book.url}" class="btn btn-primary btn-sm pull-right">
+              Read <i class="glyphicon glyphicon-book" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </div>`

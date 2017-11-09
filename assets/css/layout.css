@@ -51,6 +51,7 @@ body {
   font-size: small;
   font-style: italic;
   color: #cdcdcd;
+  overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis;
 }
 
 @media (max-width: 992px) {
