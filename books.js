@@ -42,6 +42,12 @@ const books = [{
   category: 'golang',
   tags: ['golang', 'framework', 'api']
 }, {
+  url: '/books/revel/',
+  name: 'Revel framework Docs',
+  description: 'A high productivity, full-stack web framework for the Go language.',
+  category: 'golang',
+  tags: ['golang', 'framework', 'api']
+}, {
   url: '/books/dubbo/',
   name: 'Dubbo 用户文档',
   description: '详细讲解了dubbo的使用，基本涵盖dubbo的所有功能特性'
