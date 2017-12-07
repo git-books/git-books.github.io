@@ -64,6 +64,12 @@ const books = [{
   name: 'JS 函数式编程指南中文版',
   description: 'JS 函数式编程指南中文版'
 }, {
+  url: '/books/wechat-dev-with-nodejs/',
+  name: 'Node.js微信开发',
+  description: '次讲的课是《Node.js微信开发》，是StuQ推出的第一门课，期望做成一门可以打样的课。',
+  category: 'node',
+  tags: ['node', 'js']
+}, {
   url: '/books/php-co-koa/',
   name: 'PHP异步编程: 手把手教你实现co与Koa',
   description: 'PHP异步编程: 手把手教你实现co与Koa',
