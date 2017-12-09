@@ -273,7 +273,7 @@ body {
   padding-right: 15px;
   width: 80%;
   max-width: 1200px;
-  min-width: 350px; */
+  min-width: 350px;
 }
 
 .content-bar {
@@ -293,7 +293,7 @@ body {
   max-height: 450px;
   overflow-y: auto;
 
-  background-color: #f4f4f4;
+  background-color: #f4f4f4c2;
   border: 1px solid #cdcdcd;
   box-shadow: 0 0 3px #dedede;
 }
@@ -304,7 +304,7 @@ body {
   top: 0;
   padding: 5px;
   color: #666;
-  background-color: #dedede;
+  background-color: #f0f0f0;
 }
 #content-toc {
   padding: 5px 5px 10px;
