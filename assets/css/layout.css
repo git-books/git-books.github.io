@@ -47,6 +47,14 @@ body {
     margin-bottom: 0;
 }
 
+#top-logo {
+  overflow: hidden;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  max-width: 75%;
+}
+
 .navbar p.site-des {
   font-size: small;
   font-style: italic;
