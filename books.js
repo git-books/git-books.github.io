@@ -76,6 +76,12 @@ const books = [{
   category: 'php',
   tags: ['async', 'framework']
 }, {
+  url: '/books/zephir-lang/',
+  name: 'Zephir 语言',
+  description: 'Zephir是一个开源的，类型与内存安全的高级语言',
+  category: 'php',
+  tags: ['language', 'zephir']
+}, {
   url: '/books/php-phalcon/',
   name: 'php phalcon docs',
   description: 'Phalcon is an open source full stack framework for PHP, written as a C-extension',
