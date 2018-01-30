@@ -52,7 +52,12 @@ body {
   white-space: nowrap;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  max-width: 75%;
+}
+
+@media (max-width: 769px) {
+  #top-logo {
+    max-width: 75%;
+  }
 }
 
 .navbar p.site-des {
