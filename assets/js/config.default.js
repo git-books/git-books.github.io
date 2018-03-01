@@ -1,5 +1,6 @@
 // the all config
 const config = {
+  domId: '#book-wrapper',
   // use for cache prefix
   siteName: 'beego doc',
   siteKey: 'beego-doc',
