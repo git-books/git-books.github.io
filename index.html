@@ -24,7 +24,6 @@
       /*white-space: nowrap; -o-text-overflow: ellipsis; text-overflow:  ellipsis;*/
     }
   </style>
-  <script src="/books.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -82,29 +81,30 @@
   <script src="/assets/lib/jquery-2.2.4.min.js"></script>
   <script type="text/javascript">
     $(function () {
-      let booksHtml = ''
-
-      $.each(books, function (index, book) {
-        // console.log(index, book)
-        booksHtml += `
-        <div class="book panel panel-default col-xs-6 col-sm-4 col-md-3">
-          <div class="panel-body">
-            <h4 class="book-title">
-              <a href="${book.url}" title="${book.name}">${book.name}</a>
-            </h4>
-            <p class="book-description">${book.description} ...</p>
-            <div class="clearfix">
-              <a href="${book.url}" class="btn btn-primary btn-sm pull-right">
-              Read <i class="glyphicon glyphicon-book" aria-hidden="true"></i>
-              </a>
+      $.getJSON('/books.json', function(books) {
+        let booksHtml = []
+        $.each(books, function (index, book) {
+          // console.log(index, book)
+          booksHtml[index] = `
+          <div class="book panel panel-default col-xs-6 col-sm-4 col-md-3">
+            <div class="panel-body">
+              <h4 class="book-title">
+                <a href="${book.url}" title="${book.name}">${book.name}</a>
+              </h4>
+              <p class="book-description">${book.description} ...</p>
+              <div class="clearfix">
+                <a href="${book.url}" class="btn btn-primary btn-sm pull-right">
+                Read <i class="glyphicon glyphicon-book" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
-          </div>
-        </div>`
-      })
+          </div>`
+        })
 
-      if (booksHtml) {
-        $('#book-list').html(booksHtml)
-      }
+        if (booksHtml) {
+          $('#book-list').html(booksHtml.join(''))
+        }
+      })
     })
   </script>
 </body>

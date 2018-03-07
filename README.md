@@ -16,10 +16,18 @@
 
 基于项目：[inhere/md-site-reader](https://github.com/inhere/md-site-reader.git)
 
-## 已有书籍
+## 书籍列表
+
+https://git-books.github.io 书籍列表
+
+> `✓` 已添加 `✗` 未添加
 
 - [Go web 编程](https://git-books.github.io/books/go-web-programme/) 渲染的是 @astaxie 的github项目 [《Go web 编程》](https://github.com/astaxie/build-web-application-with-golang)
-- [beego 文档](https://git-books.github.io/books/beego/)
+- [beego 文档](https://git-books.github.io/books/beego/) `✓`
+- [PHP扩展开发及内核应用](https://github.com/walu/phpbook) `✗`
+- [技术面试需要掌握的基础知识整理](https://github.com/CyC2018/Interview-Notebook) `✗`
+- [Linux工具快速教程](https://github.com/me115/linuxtools_rst) `✗`
+- [Spring Boot参考指南](https://github.com/qibaoguang/Spring-Boot-Reference-Guide) `✗`
 
 ## 使用以及配置
 
