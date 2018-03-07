@@ -10,7 +10,7 @@ $total = count($data);
 echo "Books(total $total): \n";
 
 foreach ($data as $book) {
-    echo '- ' . $book['name'] . PHP_EOL;
+    echo '- [' . $book['name'] . "]" . PHP_EOL;
 }
 
 exit;
