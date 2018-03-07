@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/common.php';
+
 global $argv;
 
 $baseDir = dirname(__DIR__);
@@ -9,13 +11,19 @@ if (!$name) {
     write_error('The book display name cannot be empty!');
 }
 
-$dir = $argv[2] ?? read_line('Please input book dir(eg my-book): ');
+$dir = $argv[2] ?? read_line('Please input book dir name(eg my-book): ');
 
 if (!$dir) {
     write_error('The book save dir name cannot be empty!');
 }
 
-write_msg('Save dir: ' . $baseDir . '/books/' . $dir);
+$bookDir = $baseDir . '/books/' . $dir;
+
+if (is_dir($bookDir)) {
+    write_error('cannot use dir name: ' . $dir . ". DIR: $bookDir exists!");
+}
+
+write_msg('Save dir: ' . $bookDir);
 
 $des = read_line('Please input book description message: ' . PHP_EOL);
 $category = read_line('Please input book category(eg php): ');
@@ -43,35 +51,9 @@ if (!$input || false === stripos($input, 'y')) {
 }
 
 $jsonFile = $baseDir . '/books.json';
-$data = json_decode(file_get_contents($jsonFile));
+$data = json_decode(file_get_contents($jsonFile), true);
 $data[] = $book;
 
 if (file_put_contents($jsonFile, json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE))) {
     write_msg('OK, add new book successful!', true);
-}
-
-/**
- * helper func
- */
-
-function read_line(string $ask) {
-    echo $ask;
-
-    return trim(fgets(\STDIN));
-}
-
-function write_msg(string $msg, bool $exit = false) {
-    fwrite(STDOUT, $msg . PHP_EOL);
-
-    if ($exit) {
-        exit;
-    }
-}
-
-function write_error(string $msg, bool $exit = true) {
-    fwrite(STDERR, '[ERROR] ' . $msg);
-
-    if ($exit) {
-        exit -2;
-    }
 }
