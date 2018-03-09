@@ -10,11 +10,10 @@
 - 自动缓存内容到本地(localSorage)，加快二次打开速度
 - 使用highlight添加代码高亮支持
 
-访问站点： https://git-books.github.io
+> 访问站点： https://git-books.github.io
 
-仓库地址： https://github.com/git-books/git-books.github.io
-
-基于项目：[inhere/md-site-reader](https://github.com/inhere/md-site-reader.git)
+- 仓库地址： https://github.com/git-books/git-books.github.io
+- 基于项目：[inhere/md-site-reader](https://github.com/inhere/md-site-reader.git)
 
 ## 书籍列表
 
@@ -28,6 +27,7 @@ https://git-books.github.io 书籍列表
 - [技术面试需要掌握的基础知识整理](https://github.com/CyC2018/Interview-Notebook) `✗`
 - [Linux工具快速教程](https://github.com/me115/linuxtools_rst) `✗`
 - [Spring Boot参考指南](https://github.com/qibaoguang/Spring-Boot-Reference-Guide) `✗`
+- [Kubernetes指南](https://github.com/feiskyer/kubernetes-handbook) `✗`
 
 ## 使用以及配置
 
