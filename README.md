@@ -28,6 +28,7 @@ https://git-books.github.io 书籍列表
 - [Linux工具快速教程](https://github.com/me115/linuxtools_rst) `✗`
 - [Spring Boot参考指南](https://github.com/qibaoguang/Spring-Boot-Reference-Guide) `✗`
 - [Kubernetes指南](https://github.com/feiskyer/kubernetes-handbook) `✗`
+- [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm) `✗`
 
 ## 使用以及配置
 
