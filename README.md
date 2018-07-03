@@ -29,6 +29,7 @@ https://git-books.github.io 书籍列表
 - [Spring Boot参考指南](https://github.com/qibaoguang/Spring-Boot-Reference-Guide) `✗`
 - [Kubernetes指南](https://github.com/feiskyer/kubernetes-handbook) `✗`
 - [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm) `✗`
+- [Xorm操作指南中文版](https://github.com/go-xorm/manual-zh-CN)
 
 ## 使用以及配置
 
