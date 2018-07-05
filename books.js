@@ -48,6 +48,13 @@ const books = [{
   category: 'golang',
   tags: ['golang', 'framework', 'api']
 }, {
+  url: '/books/xorm-zhcn/',
+  name: 'XORM 操作指南',
+  description: 'XORM 是一个简单而强大的Go语言ORM框架',
+  category: 'golang',
+  cover: 'https://raw.githubusercontent.com/go-xorm/manual-zh-CN/master/cover.jpg',
+  tags: ['golang', 'db', 'orm', 'xorm']
+}, {
   url: '/books/dubbo/',
   name: 'Dubbo 用户文档',
   description: '详细讲解了dubbo的使用，基本涵盖dubbo的所有功能特性'
