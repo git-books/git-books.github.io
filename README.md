@@ -30,6 +30,8 @@ https://git-books.github.io 书籍列表
 - [Kubernetes指南](https://github.com/feiskyer/kubernetes-handbook) `✗`
 - [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm) `✗`
 - [Xorm操作指南中文版](https://github.com/go-xorm/manual-zh-CN)
+- [Go语言高级编程](https://github.com/chai2010/advanced-go-programming-book)
+- [V2Ray 配置指南](https://github.com/ToutyRater/v2ray-guide)
 
 ## 使用以及配置
 
